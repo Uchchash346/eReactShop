@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { FiShoppingCart } from 'react-icons/fi';
+import { CgMenu, CgClose } from 'react-icons/cg';
 
 const Nav = () => {
+    const [menuIcon, setMenuIcon] = useState();
     const Nav = styled.nav`
     .navbar-lists {
       display: flex;
@@ -136,18 +138,22 @@ const Nav = () => {
     }
   `;
     return <Nav>
-        <div className='navbar'>
+        <div className={menuIcon ? "navbar active" : "navbar"}>
             <ul className='navbar-lists'>
                 <li>
-                    <NavLink to="/" className="navbar-link">
+                    <NavLink to="/" className="navbar-link"
+                    onClick={() => setMenuIcon(false)}
+                    >
                         Home
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to="/about" className="navbar-link">
+                    <NavLink to="/about" className="navbar-link"
+                    onClick={() => setMenuIcon(false)}
+                    >
                         About
                     </NavLink>
-                </li> 
+                </li>
                 <li>
                     <NavLink to="/products" className="navbar-link">
                         Products
@@ -165,6 +171,19 @@ const Nav = () => {
                     </NavLink>
                 </li>
             </ul>
+            {/* buttons for Menu */}
+            <div className='mobile-navbar-btn'>
+                <CgMenu
+                    name="menu-outline"
+                    className="mobile-nav-icon"
+                    onClick={() => setMenuIcon(true)}
+                />
+                <CgClose
+                    name="close-outline"
+                    className="mobile-nav-icon close-outline"
+                    onClick={() => setMenuIcon(false)}
+                />
+            </div>
         </div>
     </Nav>
 
